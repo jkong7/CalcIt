@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculus Platform</title>
+    <link rel="stylesheet" href="static/main.css"> <!-- Main CSS file -->
+    <link rel="stylesheet" href="static/style.css"> <!-- Sign-In Form CSS file -->
+</head>
+<body data-logged-in="{{ current_user.is_authenticated }}">
+
+    <div class="content-wrapper">
+        <header>
+            <nav>
+                <div class="logo">LOGO</div>
+                <ul>
+                    <li><a href="#about-us-section">About Us</a></li>
+                    <li><a href="#" id="dashboardBtn">My Dashboard</a></li> <!-- Dashboard button -->
+                    <li><a href="#" id="signInBtn" class="button">Sign In</a></li> <!-- Sign-In button -->
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Calculus, Evolved.</h1>
+                <p>Tailored, focused, and efficient: your path to calculus success. Register to kickstart your calculus journey today!</p>
+                <form>
+                    <input type="email" placeholder="Enter your email...">
+                    <button type="submit" class="button">Book a Demo</button>
+                </form>
+            </div>
+        
+            <div class="hero-image">
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='num1.png') }}" alt="Illustration 1" class="overlapping-image top-image">
+                    <img src="{{ url_for('static', filename='num2.png') }}" alt="Illustration 2" class="overlapping-image bottom-image">
+                </div>
+            </div>
+        </section>
+        
+
+        <section class="about-us" id="about-us-section">
+            <div class="container">
+                <h2 class="section-title">Master Calculus with <span class="highlight">Calc It</span></h2>
+                <p class="intro">
+                    Say goodbye to endless, confusing resources. At Calc It, we've distilled everything you need into 30 compact, laser-focused handouts designed to make calculus click.
+                </p>
+                <div class="features">
+                    <div class="feature">
+                        <h3>Efficient Learning</h3>
+                        <p>Our 30-handout structure is designed to give you exactly what you need, when you need it—no more, no less.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Structured Path</h3>
+                        <p>Follow a clear, structured path from start to finish. You’ll always know what’s next, with no wasted time.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Progress Tracking</h3>
+                        <p>Keep tabs on your progress and see exactly where you stand. Our tracker ensures you stay motivated and on track.</p>
+                    </div>
+                </div>
+                <div class="cta">
+                    <p>Join the Calc It community today and turn calculus from a challenge into a strength!</p>
+                </div>
+            </div>
+        </section>
+        
+
+        <section class="anatomy-section">
+            <div class="container">
+                <h2 class="section-title">Anatomy of <span class="highlight">Calc It Handouts</span></h2>
+        
+                <!-- First Handout Section -->
+                <div class="anatomy-content">
+                    <div class="annotation-wrapper annotation-left custom-annotation-left">
+                        <div class="annotation">
+                            Concise summaries at the start of every handout to give you an instant overview of key concepts
+                            <div class="annotation-line custom-line-left"></div>
+                        </div>
+                    </div>
+                    <div class="handout-image-container">
+                        <img src="{{ url_for('static', filename='num1.png') }}" alt="Illustration 1" class="handout-image">
+                    </div>
+                    <div class="annotation-wrapper annotation-right custom-annotation-right">
+                        <div class="annotation">
+                            Crystal-clear explanations and visuals, guiding you with precision—no fluff, just focused learning
+                            <div class="annotation-line custom-line-right"></div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Second Handout Section (Cloned with new class names) -->
+                <div class="anatomy-content">
+                    <div class="annotation-wrapper annotation-left custom-annotation-left-2">
+                        <div class="annotation">
+                            Jump into practice as you learn—these integrated exercises deepen your understanding through active engagement
+                            <div class="annotation-line custom-line-left-2"></div>
+                        </div>
+                    </div>
+                    <div class="handout-image-container">
+                        <img src="{{ url_for('static', filename='num2.png') }}" alt="Illustration 2" class="handout-image">
+                    </div>
+                    <div class="annotation-wrapper annotation-right custom-annotation-right-2">
+                        <div class="annotation">
+                            In-depth, guided solutions to exercises, ensuring you don’t skip a beat and master each step
+                            <div class="annotation-line custom-line-right-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Third Handout Section (Cloned with new class names) -->
+                <div class="anatomy-content">
+                    <div class="annotation-wrapper annotation-left custom-annotation-left-3">
+                        <div class="annotation">
+                            Purposeful exercises to cement your understanding before moving on
+                            <div class="annotation-line custom-line-left-3"></div>
+                        </div>
+                    </div>
+                    <div class="handout-image-container">
+                        <img src="{{ url_for('static', filename='num3.png') }}" alt="Illustration 3" class="handout-image">
+                    </div>
+                    <div class="annotation-wrapper annotation-right custom-annotation-right-3">
+                        <div class="annotation">
+                            Final takeaways to ensure you leave with a clear grasp of core concepts
+                            <div class="annotation-line custom-line-right-3"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+        
+        
+        
+
+
+    </div>
+
+    <!-- Overlay for Dimming Effect -->
+    <div class="dim-overlay" id="dimOverlay"></div>
+
+    <div id="dashboard" class="dashboard">
+        <div class="dashboard-content">
+            <!-- Limits Section -->
+            <div class="dashboard-section" data-total="1">
+                <div class="dashboard-header" onclick="toggleSection('limits-section')">
+                    <span class="section-title">Limits</span>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="limits-progress-bar"></div>
+                    </div>
+                </div>
+                <div id="limits-section" class="dashboard-items">
+                    <div class="dashboard-row header-row">
+                        <div class="column-title">Status</div>
+                        <div class="column-title">Bookmark</div>
+                        <div class="column-title">Handout Title</div>
+                    </div>
+    
+                    <!-- Only show user progress if logged in -->
+                    {% if current_user.is_authenticated %}
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status1" class="progress-checkbox" data-section="limits" 
+                                {% if user_progress.get(1) %}checked{% endif %}>
+                            <label for="status1" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=1) }}" class="handout-link">Introduction to Limits</a>
+                        </div>
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status2" class="progress-checkbox" data-section="limits" 
+                                {% if user_progress.get(2) %}checked{% endif %}>
+                            <label for="status2" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=2) }}" class="handout-link">Continuity</a>
+                        </div>
+                    {% else %}
+                        <!-- Default unchecked state for logged-out users -->
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status1" class="progress-checkbox" data-section="limits" disabled>
+                            <label for="status1" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=1) }}" class="handout-link">Introduction to Limits</a>
+                        </div>
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status2" class="progress-checkbox" data-section="limits" disabled>
+                            <label for="status2" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=2) }}" class="handout-link">Continuity</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+    
+            <!-- Derivatives Section -->
+            <div class="dashboard-section" data-total="1">
+                <div class="dashboard-header" onclick="toggleSection('derivatives-section')">
+                    <span class="section-title">Derivatives</span>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="derivatives-progress-bar"></div>
+                    </div>
+                </div>
+                <div id="derivatives-section" class="dashboard-items">
+                    <div class="dashboard-row header-row">
+                        <div class="column-title">Status</div>
+                        <div class="column-title">Bookmark</div>
+                        <div class="column-title">Handout Title</div>
+                    </div>
+    
+                    <!-- Only show user progress if logged in -->
+                    {% if current_user.is_authenticated %}
+                        <!-- Handout 1 -->
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status4" class="progress-checkbox" data-section="derivatives" 
+                                {% if user_progress.get(4) %}checked{% endif %}>
+                            <label for="status4" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=4) }}" class="handout-link">Definition of the Derivative</a>
+                        </div>
+                        <!-- Handout 2 -->
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status5" class="progress-checkbox" data-section="derivatives" 
+                                {% if user_progress.get(5) %}checked{% endif %}>
+                            <label for="status5" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=5) }}" class="handout-link">Derivative Properties</a>
+                        </div>
+                        <!-- Handout 3 -->
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status6" class="progress-checkbox" data-section="derivatives" 
+                                {% if user_progress.get(6) %}checked{% endif %}>
+                            <label for="status6" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=6) }}" class="handout-link">The Chain Rule</a>
+                        </div>
+                        <!-- Handout 4 -->
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status7" class="progress-checkbox" data-section="derivatives" 
+                                {% if user_progress.get(7) %}checked{% endif %}>
+                            <label for="status7" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=7) }}" class="handout-link">Implicit Differentiation</a>
+                        </div>
+                    {% else %}
+                        <!-- Default unchecked state for logged-out users -->
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status4" class="progress-checkbox" data-section="derivatives" disabled>
+                            <label for="status4" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=4) }}" class="handout-link">Definition of the Derivative</a>
+                        </div>
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status5" class="progress-checkbox" data-section="derivatives" disabled>
+                            <label for="status5" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=5) }}" class="handout-link">Derivative Properties</a>
+                        </div>
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status6" class="progress-checkbox" data-section="derivatives" disabled>
+                            <label for="status6" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=6) }}" class="handout-link">The Chain Rule</a>
+                        </div>
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status7" class="progress-checkbox" data-section="derivatives" disabled>
+                            <label for="status7" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=7) }}" class="handout-link">Implicit Differentiation</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+    
+            <!-- Applications of the Derivative Section -->
+            <div class="dashboard-section" data-total="1">
+                <div class="dashboard-header" onclick="toggleSection('applications-derivative-section')">
+                    <span class="section-title">Applications of the Derivative</span>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="applications-derivative-progress-bar"></div>
+                    </div>
+                </div>
+                <div id="applications-derivative-section" class="dashboard-items">
+                    <div class="dashboard-row header-row">
+                        <div class="column-title">Status</div>
+                        <div class="column-title">Bookmark</div>
+                        <div class="column-title">Handout Title</div>
+                    </div>
+    
+                    <!-- Only show user progress if logged in -->
+                    {% if current_user.is_authenticated %}
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status8" class="progress-checkbox" data-section="applications-derivative" 
+                                {% if user_progress.get(8) %}checked{% endif %}>
+                            <label for="status8" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=8) }}" class="handout-link">Applications of the Derivative</a>
+                        </div>
+                    {% else %}
+                        <!-- Default unchecked state for logged-out users -->
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status8" class="progress-checkbox" data-section="applications-derivative" disabled>
+                            <label for="status8" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=8) }}" class="handout-link">Applications of the Derivative</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+    
+            <!-- Integrals Section -->
+            <div class="dashboard-section" data-total="1">
+                <div class="dashboard-header" onclick="toggleSection('integrals-section')">
+                    <span class="section-title">Integrals</span>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="integrals-progress-bar"></div>
+                    </div>
+                </div>
+                <div id="integrals-section" class="dashboard-items">
+                    <div class="dashboard-row header-row">
+                        <div class="column-title">Status</div>
+                        <div class="column-title">Bookmark</div>
+                        <div class="column-title">Handout Title</div>
+                    </div>
+    
+                    <!-- Only show user progress if logged in -->
+                    {% if current_user.is_authenticated %}
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status9" class="progress-checkbox" data-section="integrals" 
+                                {% if user_progress.get(9) %}checked{% endif %}>
+                            <label for="status9" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=9) }}" class="handout-link">Introduction to Integrals</a>
+                        </div>
+                    {% else %}
+                        <!-- Default unchecked state for logged-out users -->
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status9" class="progress-checkbox" data-section="integrals" disabled>
+                            <label for="status9" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=9) }}" class="handout-link">Introduction to Integrals</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+    
+            <!-- Applications of the Integral Section -->
+            <div class="dashboard-section" data-total="1">
+                <div class="dashboard-header" onclick="toggleSection('applications-integral-section')">
+                    <span class="section-title">Applications of the Integral</span>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="applications-integral-progress-bar"></div>
+                    </div>
+                </div>
+                <div id="applications-integral-section" class="dashboard-items">
+                    <div class="dashboard-row header-row">
+                        <div class="column-title">Status</div>
+                        <div class="column-title">Bookmark</div>
+                        <div class="column-title">Handout Title</div>
+                    </div>
+    
+                    <!-- Only show user progress if logged in -->
+                    {% if current_user.is_authenticated %}
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status10" class="progress-checkbox" data-section="applications-integral" 
+                                {% if user_progress.get(10) %}checked{% endif %}>
+                            <label for="status10" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=10) }}" class="handout-link">Applications of the Integral</a>
+                        </div>
+                    {% else %}
+                        <!-- Default unchecked state for logged-out users -->
+                        <div class="dashboard-row">
+                            <input type="checkbox" id="status10" class="progress-checkbox" data-section="applications-integral" disabled>
+                            <label for="status10" class="checkbox"></label>
+                            <div class="star">&#9733;</div>
+                            <a href="{{ url_for('handout', handout_id=10) }}" class="handout-link">Applications of the Integral</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+    
+        </div>
+    </div>
+
+    
+    
+    
+    
+    
+
+    <!-- Sign-In/Registration Form (Pop-up) -->
+    <div class="wrapper" id="signInForm">
+        <span class="icon-close">
+            <ion-icon name="close-outline"></ion-icon>
+        </span>
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="mail-outline"></ion-icon>
+                    </span>
+                    <input type="email" name="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                    </span>
+                    <input type="password" name="password" required>
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox"> Remember me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn">Log in</button>
+                <div class="login-register">
+                    <p>Don't Have an account?
+                        <a href="#" class="register-link">Register</a></p>
+                </div>
+            </form>
+        </div> 
+
+        <div class="form-box register">
+            <h2>Register</h2>
+            <form action="/register" method="POST">
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                    </span>
+                    <input type="text" name="username" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="mail-outline"></ion-icon>
+                    </span>
+                    <input type="email" name="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                    </span>
+                    <input type="password" name="password" required>
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox"> I agree to the terms & conditions</label>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+                <div class="login-register">
+                    <p>Already have an account?
+                        <a href="#" class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div> 
+    </div>
+
+    <script src="static/scripts.js"></script> <!-- Link to the JavaScript file -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>

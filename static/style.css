@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Sign-In and Registration Form Specific Styles */
+.wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0); /* Start hidden */
+    width: 400px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    z-index: 1003; /* Above the overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease, height 0.2s ease, opacity 0.5s ease; /* Smooth transition for popup */
+    opacity: 0; /* Start invisible */
+}
+
+/* Active state for the form wrapper */
+.wrapper.active-popup {
+    transform: translate(-50%, -50%) scale(1); /* Scale to full size */
+    opacity: 1; /* Fade in */
+}
+
+.form-box {
+    width: 100%;
+    padding: 40px;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transitions */
+}
+
+/* Initial state for the register form */
+.form-box.register {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: translateX(400px); /* Initially off-screen */
+}
+
+/* Active state for the register form */
+.wrapper.active .form-box.register {
+    opacity: 1;
+    transform: translateX(0); /* Slide in */
+}
+
+/* Hide the login form when the register form is active */
+.wrapper.active .form-box.login {
+    opacity: 0;
+    transform: translateX(-400px); /* Slide out */
+}
+
+/* Icon to close the forms */
+.icon-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1;
+    transition: background 0.3s ease; /* Add a smooth transition for hover effect */
+}
+
+.icon-close:hover {
+    background: rgba(83, 73, 73, 0.5); /* Subtle gray hover effect */
+    color: #fff; /* Optional: change the icon color on hover */
+}
+
+.form-box h2 {
+    font-size: 2em;
+    color: black;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid black;
+    margin: 30px 0;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1.1em;
+    color: black;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: black;
+    line-height: 57px;
+}
+
+.remember-forgot {
+    font-size: .9em;
+    color: black;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    accent-color: black;
+    margin-right: 3px;
+}
+
+.remember-forgot a {
+    color: black;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+.btn:hover {
+    background: rgba(83, 73, 73, 0.5);
+    color: #fff;
+    border-color: #fff;
+}
+
+.login-register {
+    font-size: 14.5px;
+    text-align: center;
+    color: black;
+    font-weight: 600;
+    margin: 20px 0 15px;
+}
+
+.login-register p a {
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-register p a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+
+@media only screen and (max-width: 780px) {
+    .wrapper {
+        width: 350px;
+    }
+    .form-box {
+        padding: 30px;
+    }
+    .wrapper.active .form-box.login {
+        transform: translateX(-350px);
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .wrapper {
+        width: 300px;
+    }
+    .form-box {
+        padding: 20px;
+    }
+    .form-box h2 {
+        font-size: 1.5em;
+    }
+    .input-box label {
+        font-size: 1em;
+    }
+    .btn {
+        height: 40px;
+        font-size: 14px;
+    }
+    .wrapper.active .form-box.login {
+        transform: translateX(-300px);
+    }
+}
+
+.wrapper .icon-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    font-size: 2em;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.wrapper .icon-close:hover {
+    background: rgba(83,73,73,0.5);
+    color: #fff;
+    border-color: #fff;
+}

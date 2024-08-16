@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Handout {{ handout_id }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <title>{{ handout['title'] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
 </head>
 <body>
     <header>
@@ -12,41 +13,39 @@
             <div class="logo">Calc It</div>
             <ul>
                 <li><a href="{{ url_for('main') }}">Home</a></li>
-                <!-- Removed the My Dashboard button -->
             </ul>
         </nav>
     </header>
     
     <div class="handout-page">
         <div class="handout-header">
-            <h1>Introduction to Limits {{ handout_id }}</h1>
+            <h1>{{ handout['title'] }}</h1>
         </div>
         
         <div class="handout-content">
             <div class="handout-image-container">
-                <img src="{{ url_for('static', filename='handout1.png') }}" alt="Handout 1" class="handout-image-sep">
+                <img src="{{ url_for('static', filename='images/' + handout['image']) }}" alt="{{ handout['title'] }}" class="handout-image-sep">
+
                 <div class="cta">
-                    <a href="{{ url_for('static', filename='handout1.pdf') }}" class="button">Download Handout</a>
+                    <a id="download-handout-btn" class="btn btn-primary" href="{{ handout['downloadLink'] }}" target="_blank">Go to Handout</a>
                 </div>
             </div>
             <div class="handout-details">
                 <h2>Description</h2>
-                <p>This handout provides an introduction to limits, a foundational concept in calculus that describes the behavior of functions as they approach a specific point.</p>
+                <p>{{ handout['description'] }}</p>
                 
                 <h3>Learning Objectives</h3>
                 <ul>
-                    <li>Understand the concept of limits and how they are calculated.</li>
-                    <li>Apply limits to analyze the behavior of functions near critical points.</li>
-                    <li>Solve problems involving limits and continuity.</li>
-                    <li>Explore how limits can be used in real-world scenarios.</li>
+                    {% for objective in handout['learning_objectives'] %}
+                        <li>{{ objective }}</li>
+                    {% endfor %}
                 </ul>
 
                 <h3>Key Concepts</h3>
                 <ul>
-                    <li>Limits</li>
-                    <li>Continuity</li>
-                    <li>Asymptotic Behavior</li>
-                    <li>Concepts of finite and infinite limits.</li>
+                    {% for concept in handout['key_concepts'] %}
+                        <li>{{ concept }}</li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>

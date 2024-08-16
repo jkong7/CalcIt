@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+
+from handout_data import handouts
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
@@ -68,6 +70,8 @@ def main():
 
     return render_template('main.html', handouts=handouts, user_progress=user_progress)
 
+
+
 @app.route('/register', methods=['POST'])
 def register():
     username = request.form.get('username')
@@ -77,14 +81,16 @@ def register():
     # Check if the email already exists
     existing_user = User.query.filter_by(email=email).first()
     if existing_user:
-        return "Email already registered. Please use a different email."
+        flash("Email already registered. Please use a different email.", "error")
+        return redirect(url_for('main'))
 
     # Create a new user and add to the database
     new_user = User(username=username, email=email, password=password)
     db.session.add(new_user)
     db.session.commit()
 
-    return "Registration successful!"
+    flash("Registration successful!", "success")
+    return redirect(url_for('main'))
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -94,9 +100,12 @@ def login():
 
     if user and user.password == password:
         login_user(user)
-        return redirect(url_for('main'))  # Redirect back to the home page
+        flash("Login successful!", "success")
+        return redirect(url_for('main'))
     else:
-        return "Login failed. Check your email and password."
+        flash("Login failed. Check your email and password.", "error")
+        return redirect(url_for('main'))
+
 
 @app.route('/dashboard')
 @login_required
@@ -118,22 +127,25 @@ def logout():
     logout_user()
     return redirect(url_for('main'))  # Redirect to the main page after logging out
 
+
+
+
+
+
+
+
+
 @app.route('/handout/<int:handout_id>')
 @login_required
 def handout(handout_id):
-    # For now, use placeholder data; later, this can be fetched from a database
-    handouts = {
-        1: {"title": "Handout 1", "description": "Description for Handout 1", "key_concepts": ["Concept A", "Concept B"], "image": "handout1.png"},
-        2: {"title": "Handout 2", "description": "Description for Handout 2", "key_concepts": ["Concept C", "Concept D"], "image": "handout2.png"},
-        # Add more handouts as needed
-    }
-    
+    # Fetch the handout data
     handout_data = handouts.get(handout_id, None)
-    
+
     if not handout_data:
         return "Handout not found", 404
 
-    return render_template('handout.html', handout=handout_data)
+    return render_template('handout.html', handout=handout_data, handout_id=handout_id)
+
 
 @app.route('/update_progress', methods=['POST'])
 @login_required

@@ -1,142 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculus Platform</title>
+    <!-- Linking CSS Files -->
     <link rel="stylesheet" href="static/css/main.css"> <!-- Main CSS file -->
     <link rel="stylesheet" href="static/css/SIform.css"> <!-- Sign-In Form CSS file -->
 </head>
+
 <body data-logged-in="{{ current_user.is_authenticated }}">
 
-    <div class="content-wrapper">
-        <header>
-            <nav>
-                <div class="logo">LOGO</div>
-                <ul>
-                    <li><a href="#about-us-section">About</a></li>
-                    <li><a href="#" id="dashboardBtn">My Dashboard</a></li> <!-- Dashboard button -->
-                    <li><a href="#" id="signInBtn" class="button">Sign In</a></li> <!-- Sign-In button -->
-                </ul>
-            </nav>
-        </header>
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <div class="logo">Calc It!</div>
+            <ul>
+                <li><a href="#about-us-section">About</a></li>
+                <li><a href="#" id="dashboardBtn">My Dashboard</a></li> <!-- Dashboard button -->
+                <li><a href="#" id="signInBtn" class="button">Sign In</a></li> <!-- Sign-In button -->
+            </ul>
+        </nav>
+    </header>
+    <!-- End of Header Section -->
 
-        <section class="hero">
-            <div class="hero-text">
-                <h1>Calculus, Evolved.</h1>
-                <p>Tailored, focused, and efficient: your path to calculus success. Register to kickstart your calculus journey today!</p>
-                <form>
-                    <input type="email" placeholder="Enter your email...">
-                    <button type="submit" class="button">Book a Demo</button>
-                </form>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Calculus, Evolved.</h1>
+            <p>Tailored, focused, and efficient: your path to calculus success. Register to kickstart your calculus journey today!</p>
+        </div>
+        <div class="hero-image">
+            <div class="image-container">
+                <img src="{{ url_for('static', filename='images/num1.png') }}" alt="Illustration 1" class="overlapping-image top-image">
+                <img src="{{ url_for('static', filename='images/num2.png') }}" alt="Illustration 2" class="overlapping-image bottom-image">
             </div>
-        
-            <div class="hero-image">
-                <div class="image-container">
-                    <img src="{{ url_for('static', filename='images/num1.png') }}" alt="Illustration 1" class="overlapping-image top-image">
-                    <img src="{{ url_for('static', filename='images/num2.png') }}" alt="Illustration 2" class="overlapping-image bottom-image">
-                    
+        </div>
+    </section>
+    <!-- End of Hero Section -->
+
+    <!-- About Us Section -->
+    <section class="about-us" id="about-us-section">
+        <div class="container">
+            <h2 class="section-title">Master Calculus with <span class="highlight">Calc It</span></h2>
+            <p class="intro">
+                Say goodbye to endless, confusing resources. At Calc It, we've distilled everything you need into 30 compact, laser-focused handouts designed to make calculus click.
+            </p>
+            <div class="features">
+                <!-- Feature 1 -->
+                <div class="feature">
+                    <h3>Efficient Learning</h3>
+                    <p>Our 30-handout structure is designed to give you exactly what you need, when you need it—no more, no less.</p>
                 </div>
+                <!-- End of Feature 1 -->
+
+                <!-- Feature 2 -->
+                <div class="feature">
+                    <h3>Structured Path</h3>
+                    <p>Follow a clear, structured path from start to finish. You’ll always know what’s next, with no wasted time.</p>
+                </div>
+                <!-- End of Feature 2 -->
+
+                <!-- Feature 3 -->
+                <div class="feature">
+                    <h3>Progress Tracking</h3>
+                    <p>Keep tabs on your progress and see exactly where you stand. Our tracker ensures you stay motivated and on track.</p>
+                </div>
+                <!-- End of Feature 3 -->
             </div>
-        </section>
-        
-
-        <section class="about-us" id="about-us-section">
-            <div class="container">
-                <h2 class="section-title">Master Calculus with <span class="highlight">Calc It</span></h2>
-                <p class="intro">
-                    Say goodbye to endless, confusing resources. At Calc It, we've distilled everything you need into 30 compact, laser-focused handouts designed to make calculus click.
-                </p>
-                <div class="features">
-                    <div class="feature">
-                        <h3>Efficient Learning</h3>
-                        <p>Our 30-handout structure is designed to give you exactly what you need, when you need it—no more, no less.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>Structured Path</h3>
-                        <p>Follow a clear, structured path from start to finish. You’ll always know what’s next, with no wasted time.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>Progress Tracking</h3>
-                        <p>Keep tabs on your progress and see exactly where you stand. Our tracker ensures you stay motivated and on track.</p>
-                    </div>
-                </div>
-                <div class="cta">
-                    <p>Join the Calc It community today and turn calculus from a challenge into a strength!</p>
-                </div>
+            <div class="cta">
+                <p>Join the Calc It community today and turn calculus from a challenge into a strength!</p>
             </div>
-        </section>
-        
+        </div>
+    </section>
+    <!-- End of About Us Section -->
 
-        <section class="anatomy-section">
-            <div class="container">
-                <h2 class="section-title">Anatomy of <span class="highlight">Calc It Handouts</span></h2>
-        
-                <!-- First Handout Section -->
-                <div class="anatomy-content">
-                    <div class="annotation-wrapper annotation-left custom-annotation-left">
-                        <div class="annotation">
-                            Concise summaries at the start of every handout to give you an instant overview of key concepts
-                            <div class="annotation-line custom-line-left"></div>
-                        </div>
-                    </div>
-                    <div class="handout-image-container">
-                        <img src="{{ url_for('static', filename='images/num1.png') }}" alt="Illustration 1" class="handout-image">
+    <!-- Anatomy of Handouts Section -->
+    <section class="anatomy-section">
+        <div class="container">
+            <h2 class="section-title">Anatomy of <span class="highlight">Calc It Handouts</span></h2>
 
-                    </div>
-                    <div class="annotation-wrapper annotation-right custom-annotation-right">
-                        <div class="annotation">
-                            Crystal-clear explanations and visuals, guiding you with precision—no fluff, just focused learning
-                            <div class="annotation-line custom-line-right"></div>
-                        </div>
+            <!-- Handout Section 1 -->
+            <div class="anatomy-content">
+                <div class="annotation-wrapper annotation-left custom-annotation-left">
+                    <div class="annotation">
+                        Concise summaries at the start of every handout to give you an instant overview of key concepts
+                        <div class="annotation-line custom-line-left"></div>
                     </div>
                 </div>
-        
-                <!-- Second Handout Section -->
-                <div class="anatomy-content">
-                    <div class="annotation-wrapper annotation-left custom-annotation-left-2">
-                        <div class="annotation">
-                            Jump into practice as you learn—these integrated exercises deepen your understanding through active engagement
-                            <div class="annotation-line custom-line-left-2"></div>
-                        </div>
-                    </div>
-                    <div class="handout-image-container">
-                        <img src="{{ url_for('static', filename='images/num2.png') }}" alt="Illustration 2" class="handout-image">
-                    </div>
-                    <div class="annotation-wrapper annotation-right custom-annotation-right-2">
-                        <div class="annotation">
-                            In-depth, guided solutions to exercises, ensuring you don’t skip a beat and master each step
-                            <div class="annotation-line custom-line-right-2"></div>
-                        </div>
-                    </div>
+                <div class="handout-image-container">
+                    <img src="{{ url_for('static', filename='images/num1.png') }}" alt="Illustration 1" class="handout-image">
                 </div>
-
-                <!-- Third Handout Section -->
-                <div class="anatomy-content">
-                    <div class="annotation-wrapper annotation-left custom-annotation-left-3">
-                        <div class="annotation">
-                            Purposeful exercises to cement your understanding before moving on
-                            <div class="annotation-line custom-line-left-3"></div>
-                        </div>
-                    </div>
-                    <div class="handout-image-container">
-                        <img src="{{ url_for('static', filename='images/num3.png') }}" alt="Illustration 3" class="handout-image">
-                    </div>
-                    <div class="annotation-wrapper annotation-right custom-annotation-right-3">
-                        <div class="annotation">
-                            Final takeaways to ensure you leave with a clear grasp of core concepts
-                            <div class="annotation-line custom-line-right-3"></div>
-                        </div>
+                <div class="annotation-wrapper annotation-right custom-annotation-right">
+                    <div class="annotation">
+                        Crystal-clear explanations and visuals, guiding you with precision—no fluff, just focused learning
+                        <div class="annotation-line custom-line-right"></div>
                     </div>
                 </div>
             </div>
-        </section>
+            <!-- End of Handout Section 1 -->
 
-    </div>
+            <!-- Handout Section 2 -->
+            <div class="anatomy-content">
+                <div class="annotation-wrapper annotation-left custom-annotation-left-2">
+                    <div class="annotation">
+                        Jump into practice as you learn—these integrated exercises deepen your understanding through active engagement
+                        <div class="annotation-line custom-line-left-2"></div>
+                    </div>
+                </div>
+                <div class="handout-image-container">
+                    <img src="{{ url_for('static', filename='images/num2.png') }}" alt="Illustration 2" class="handout-image">
+                </div>
+                <div class="annotation-wrapper annotation-right custom-annotation-right-2">
+                    <div class="annotation">
+                        In-depth, guided solutions to exercises, ensuring you don’t skip a beat and master each step
+                        <div class="annotation-line custom-line-right-2"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Handout Section 2 -->
 
-    <!-- Overlay for Dimming Effect -->
+            <!-- Handout Section 3 -->
+            <div class="anatomy-content">
+                <div class="annotation-wrapper annotation-left custom-annotation-left-3">
+                    <div class="annotation">
+                        Purposeful exercises to cement your understanding before moving on
+                        <div class="annotation-line custom-line-left-3"></div>
+                    </div>
+                </div>
+                <div class="handout-image-container">
+                    <img src="{{ url_for('static', filename='images/num3.png') }}" alt="Illustration 3" class="handout-image">
+                </div>
+                <div class="annotation-wrapper annotation-right custom-annotation-right-3">
+                    <div class="annotation">
+                        Final takeaways to ensure you leave with a clear grasp of core concepts
+                        <div class="annotation-line custom-line-right-3"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Handout Section 3 -->
+        </div>
+    </section>
+    <!-- End of Anatomy of Handouts Section -->
+
+    <!-- Dim Overlay -->
     <div class="dim-overlay" id="dimOverlay"></div>
+    <!-- End of Dim Overlay -->
 
+
+    <!-- My Dashboard Section -->
     <div id="dashboard" class="dashboard">
         <div class="dashboard-content">
             <!-- Limits Section -->
@@ -439,9 +452,6 @@
                     <input type="password" name="password" required>
                     <label>Password</label>
                 </div>
-                <div class="remember-forgot">
-                    <label><input type="checkbox"> I agree to the terms & conditions</label>
-                </div>
                 <button type="submit" class="btn">Sign Up</button>
                 <div class="login-register">
                     <p>Already have an account?
@@ -451,6 +461,7 @@
         </div> 
     </div>
 
+    <!-- Flash Messages-->
     <div class="flash-messages">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}

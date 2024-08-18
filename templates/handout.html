@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ handout['title'] }}</title>
+    <!-- Linking CSS File -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-
 </head>
+
 <body>
+    <!-- Header Section -->
     <header>
         <nav>
-            <div class="logo">Calc It</div>
+            <div class="logo">Calc It!</div>
             <ul>
                 <li><a href="{{ url_for('main') }}">Home</a></li>
             </ul>
         </nav>
     </header>
-    
+    <!-- End of Header Section -->
+
+    <!-- Handout Page Content -->
     <div class="handout-page">
+        <!-- Handout Header -->
         <div class="handout-header">
             <h1>{{ handout['title'] }}</h1>
         </div>
-        
-        <div class="handout-content">
-            <div class="handout-image-container">
-                <img src="{{ url_for('static', filename='images/' + handout['image']) }}" alt="{{ handout['title'] }}" class="handout-image-sep">
+        <!-- End of Handout Header -->
 
+        <!-- Handout Content -->
+        <div class="handout-content">
+            <!-- Handout Image and Download Button -->
+            <div class="handout-image-container">
+                <img src="{{ url_for('static', filename='images/' + handout['image']) }}" 
+                     alt="{{ handout['title'] }}" 
+                     class="handout-image-sep">
                 <div class="cta">
-                    <a id="download-handout-btn" class="btn btn-primary" href="{{ handout['downloadLink'] }}" target="_blank">Go to Handout</a>
+                    <a id="download-handout-btn" 
+                       class="btn btn-primary" 
+                       href="{{ handout['downloadLink'] }}" 
+                       target="_blank">Go to Handout</a>
                 </div>
             </div>
+            <!-- End of Handout Image and Download Button -->
+
+            <!-- Handout Details -->
             <div class="handout-details">
                 <h2>Description</h2>
                 <p>{{ handout['description'] }}</p>
@@ -48,9 +64,14 @@
                     {% endfor %}
                 </ul>
             </div>
+            <!-- End of Handout Details -->
         </div>
+        <!-- End of Handout Content -->
     </div>
+    <!-- End of Handout Page Content -->
 
+    <!-- JavaScript File -->
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
+
 </html>

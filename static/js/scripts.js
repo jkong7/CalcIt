@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Smooth scrolling for anchor links
+
+    // ------------------ Smooth Scrolling for Anchor Links ------------------
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -10,10 +11,10 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Hide Sign-In and Registration forms initially
+    // ------------------ Initial Setup: Hide Sign-In and Registration Forms ------------------
     document.getElementById('signInForm').style.display = 'none';
 
-    // Toggle Dashboard
+    // ------------------ Toggle Dashboard Visibility ------------------
     const dashboardBtn = document.getElementById('dashboardBtn');
     const dimOverlay = document.getElementById('dimOverlay');
     const dashboard = document.getElementById('dashboard');
@@ -23,14 +24,14 @@ document.addEventListener("DOMContentLoaded", function() {
         dimOverlay.classList.toggle('show');
     });
 
-    // Close Dashboard and Sign-In/Registration forms when clicking outside
+    // ------------------ Close Forms and Dashboard When Clicking Outside ------------------
     dimOverlay.addEventListener('click', function() {
         closeForms();
         dashboard.classList.remove('show');
         dimOverlay.classList.remove('show');
     });
 
-    // Toggle Sign-In Form
+    // ------------------ Toggle Sign-In Form Visibility ------------------
     const signInBtn = document.getElementById('signInBtn');
     signInBtn.addEventListener('click', function() {
         document.querySelector('.form-box.register').style.transform = 'translateX(400px)';
@@ -45,21 +46,21 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 10);
     });
 
-    // Switch to Register Form
+    // ------------------ Switch to Register Form ------------------
     document.querySelector('.register-link').addEventListener('click', function() {
         document.querySelector('.form-box.login').style.transform = 'translateX(-400px)';
         document.querySelector('.form-box.register').style.transform = 'translateX(0)';
         document.querySelector('.wrapper').classList.add('active');
     });
 
-    // Switch back to Login Form
+    // ------------------ Switch Back to Login Form ------------------
     document.querySelector('.login-link').addEventListener('click', function() {
         document.querySelector('.form-box.register').style.transform = 'translateX(400px)';
         document.querySelector('.form-box.login').style.transform = 'translateX(0)';
         document.querySelector('.wrapper').classList.remove('active');
     });
 
-    // Close Sign-In or Registration Form
+    // ------------------ Close Sign-In or Registration Form ------------------
     function closeForms() {
         document.getElementById('signInForm').classList.remove('active-popup');
         dimOverlay.classList.remove('show');
@@ -70,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.querySelector('.icon-close').addEventListener('click', closeForms);
 
-    // Toggle Dashboard sections
+    // ------------------ Toggle Dashboard Sections ------------------
     const sectionHeaders = document.querySelectorAll('.dashboard-header');
 
     sectionHeaders.forEach(header => {
@@ -84,6 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
+    // ------------------ Progress Checkbox Handling ------------------
     const progressCheckboxes = document.querySelectorAll(".progress-checkbox");
 
     progressCheckboxes.forEach(checkbox => {
@@ -97,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function() {
         updateProgressBar(checkbox.dataset.section);
     });
 
+    // ------------------ Update Progress Bar ------------------
     function updateProgressBar(section) {
         const sectionElement = document.querySelector(`[data-section="${section}"]`).closest(".dashboard-section");
         const totalCheckboxes = sectionElement.querySelectorAll(".progress-checkbox").length;
@@ -107,6 +110,7 @@ document.addEventListener("DOMContentLoaded", function() {
         progressBar.style.width = `${progressPercentage}%`;
     }
 
+    // ------------------ Update Progress in Backend ------------------
     function updateProgress(handoutId, isCompleted) {
         fetch('/update_progress', {
             method: 'POST',
@@ -133,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Flash message handling
+    // ------------------ Flash Message Handling ------------------
     const flashMessageElement = document.querySelector(".flash");
     if (flashMessageElement) {
         const message = flashMessageElement.textContent.trim();
@@ -154,9 +158,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 3000);
     }
 
-    // Example of loading a handout
+    // ------------------ Loading a Handout ------------------
     loadHandout(0);
-    
 
     function loadHandout(index) {
         const handout = handouts[index];
@@ -167,4 +170,5 @@ document.addEventListener("DOMContentLoaded", function() {
         const downloadButton = document.getElementById('download-handout-btn');
         downloadButton.href = handout.downloadLink;
     }
+
 });

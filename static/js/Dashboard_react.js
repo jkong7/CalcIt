@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
-function Dashboard() {
-    const [handouts, setHandouts] = useState([]);
-    const [progress, setProgress] = useState({});
+// ------------------ Dashboard Component ------------------
 
+function Dashboard() {
+    // ------------------ State Management ------------------
+    
+    const [handouts, setHandouts] = useState([]); // Stores the list of handouts
+    const [progress, setProgress] = useState({}); // Tracks user's progress on handouts
+
+    // ------------------ useEffect: Data Fetching ------------------
+    
     useEffect(() => {
-        // Fetch handouts
+        // Fetch handouts from the API
         fetch('/api/handouts')
             .then(response => response.json())
             .then(data => setHandouts(data));
@@ -14,12 +20,16 @@ function Dashboard() {
         fetch('/api/progress')
             .then(response => response.json())
             .then(data => setProgress(data));
-    }, []);
+    }, []); 
 
+    // ------------------ Event Handlers ------------------
+    
+    // Handles the change of the checkbox state
     const handleCheckboxChange = (handoutId) => {
-        const isCompleted = !progress[handoutId];
-        setProgress(prev => ({ ...prev, [handoutId]: isCompleted }));
+        const isCompleted = !progress[handoutId]; // Toggle the completion state
+        setProgress(prev => ({ ...prev, [handoutId]: isCompleted })); // Update local state
 
+        // Send updated progress to the server
         fetch('/update_progress', {
             method: 'POST',
             headers: {
@@ -32,13 +42,15 @@ function Dashboard() {
         });
     };
 
+    // ------------------ JSX Rendering ------------------
+    
     return (
         <div className="dashboard">
             {handouts.map(handout => (
                 <div key={handout.id} className="handout-item">
                     <input
                         type="checkbox"
-                        checked={!!progress[handout.id]}
+                        checked={!!progress[handout.id]} 
                         onChange={() => handleCheckboxChange(handout.id)}
                     />
                     <span>{handout.title}</span>

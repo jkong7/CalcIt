@@ -1,3 +1,5 @@
+# File to load descriptions, iamges, and links for all 30 handout pages 
+
 handouts = {
     1: {
         "title": "Introduction to Limits",

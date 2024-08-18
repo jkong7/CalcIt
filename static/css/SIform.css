@@ -1,36 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
+/* ------------------ Global Styles ------------------ */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; 
 }
 
-/* Sign-In and Registration Form Specific Styles */
+/* ------------------ Sign-In and Registration Form Specific Styles ------------------ */
+
 .wrapper {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0); /* Start hidden */
+    transform: translate(-50%, -50%) scale(0);
     width: 400px;
     background: #fff;
     border-radius: 20px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
     overflow: hidden;
-    z-index: 1003; /* Above the overlay */
+    z-index: 1003; 
     display: flex;
     justify-content: center;
     align-items: center;
     transition: transform 0.5s ease, height 0.2s ease, opacity 0.5s ease; /* Smooth transition for popup */
-    opacity: 0; /* Start invisible */
+    opacity: 0; 
 }
 
 /* Active state for the form wrapper */
 .wrapper.active-popup {
-    transform: translate(-50%, -50%) scale(1); /* Scale to full size */
-    opacity: 1; /* Fade in */
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1; 
 }
+
+/* ------------------ Form Box Styles ------------------ */
 
 .form-box {
     width: 100%;
@@ -44,22 +49,23 @@
     top: 0;
     left: 0;
     opacity: 0;
-    transform: translateX(400px); /* Initially off-screen */
+    transform: translateX(400px);
 }
 
 /* Active state for the register form */
 .wrapper.active .form-box.register {
     opacity: 1;
-    transform: translateX(0); /* Slide in */
+    transform: translateX(0);
 }
 
 /* Hide the login form when the register form is active */
 .wrapper.active .form-box.login {
     opacity: 0;
-    transform: translateX(-400px); /* Slide out */
+    transform: translateX(-400px);
 }
 
-/* Icon to close the forms */
+/* ------------------ Close Icon Styles ------------------ */
+
 .icon-close {
     position: absolute;
     top: 10px;
@@ -72,8 +78,10 @@
 
 .icon-close:hover {
     background: rgba(83, 73, 73, 0.5); /* Subtle gray hover effect */
-    color: #fff; /* Optional: change the icon color on hover */
+    color: #fff;
 }
+
+/* ------------------ Form Content Styles ------------------ */
 
 .form-box h2 {
     font-size: 2em;
@@ -103,7 +111,7 @@
 
 .input-box input:focus~label,
 .input-box input:valid~label {
-    top: -5px;
+    top: -5px; 
 }
 
 .input-box input {
@@ -126,6 +134,8 @@
     color: black;
     line-height: 57px;
 }
+
+/* ------------------ Remember Me and Forgot Password Styles ------------------ */
 
 .remember-forgot {
     font-size: .9em;
@@ -150,6 +160,8 @@
     text-decoration: underline;
 }
 
+/* ------------------ Button Styles ------------------ */
+
 .btn {
     width: 100%;
     height: 45px;
@@ -170,6 +182,8 @@
     border-color: #fff;
 }
 
+/* ------------------ Login and Register Link Styles ------------------ */
+
 .login-register {
     font-size: 14.5px;
     text-align: center;
@@ -188,7 +202,7 @@
     text-decoration: underline;
 }
 
-/* Responsive design */
+/* ------------------ Responsive Design ------------------ */
 
 @media only screen and (max-width: 780px) {
     .wrapper {
@@ -223,6 +237,8 @@
         transform: translateX(-300px);
     }
 }
+
+/* ------------------ Close Icon ------------------ */
 
 .wrapper .icon-close {
     position: absolute;

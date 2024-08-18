@@ -2,58 +2,54 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
+# ------------------ Importing Handout Data ------------------
 from handout_data import handouts
 
+# ------------------ Flask Application Setup ------------------
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'your_secret_key'  # Needed for session management
+
+# ------------------ Database Setup ------------------
 db = SQLAlchemy(app)
+
+# ------------------ Flask-Login Manager Setup ------------------
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'  # Redirect to login page if not logged in
 
-# Update the User model to add a relationship with HandoutProgress
+# ------------------ User Model ------------------
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), nullable=False)
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
-    # New relationship: one user can have many handout progress records
     handout_progress = db.relationship('HandoutProgress', backref='user', lazy=True)
 
+# ------------------ Handout Model ------------------
 class Handout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150), nullable=False)
 
+# ------------------ Handout Progress Model ------------------
 class HandoutProgress(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     handout_id = db.Column(db.Integer, db.ForeignKey('handout.id'), nullable=False)
     is_completed = db.Column(db.Boolean, default=False)  # Track if the handout is completed
 
+# ------------------ Database Initialization ------------------
 with app.app_context():
     db.create_all()
 
-def initialize_handouts():
-    handouts = [
-        "Definition of the Derivative",
-        "Derivative Properties",
-        "The Chain Rule",
-        "Implicit Differentiation"
-        # Add more handouts here if needed
-    ]
-    for title in handouts:
-        existing_handout = Handout.query.filter_by(title=title).first()
-        if not existing_handout:
-            new_handout = Handout(title=title)
-            db.session.add(new_handout)
-    db.session.commit()
 
+# ------------------ User Loader for Flask-Login ------------------
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+# ------------------ Main Route ------------------
 @app.route('/')
 def main():
     if current_user.is_authenticated:
@@ -70,8 +66,7 @@ def main():
 
     return render_template('main.html', handouts=handouts, user_progress=user_progress)
 
-
-
+# ------------------ Registration Route ------------------
 @app.route('/register', methods=['POST'])
 def register():
     username = request.form.get('username')
@@ -92,6 +87,7 @@ def register():
     flash("Registration successful!", "success")
     return redirect(url_for('main'))
 
+# ------------------ Login Route ------------------
 @app.route('/login', methods=['POST'])
 def login():
     email = request.form.get('email')
@@ -106,7 +102,7 @@ def login():
         flash("Login failed. Check your email and password.", "error")
         return redirect(url_for('main'))
 
-
+# ------------------ Dashboard Route ------------------
 @app.route('/dashboard')
 @login_required
 def dashboard():
@@ -121,20 +117,14 @@ def dashboard():
 
     return render_template('dashboard.html', handouts=handouts, progress=progress_dict)
 
+# ------------------ Logout Route ------------------
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('main'))  # Redirect to the main page after logging out
 
-
-
-
-
-
-
-
-
+# ------------------ Handout Route ------------------
 @app.route('/handout/<int:handout_id>')
 @login_required
 def handout(handout_id):
@@ -146,7 +136,7 @@ def handout(handout_id):
 
     return render_template('handout.html', handout=handout_data, handout_id=handout_id)
 
-
+# ------------------ Update Progress Route ------------------
 @app.route('/update_progress', methods=['POST'])
 @login_required
 def update_progress():
@@ -167,9 +157,8 @@ def update_progress():
 
     return {"message": "Progress updated successfully"}
 
-
+# ------------------ Main Execution ------------------
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()  # Create the database and tables
-        initialize_handouts()  # Initialize the handout data
     app.run(debug=True, port=5001)

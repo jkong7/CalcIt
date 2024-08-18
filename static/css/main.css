@@ -1,6 +1,8 @@
+/* ------------------ Global Styles ------------------ */
+
 body, html {
-    font-family: 'Helvetica Neue', Arial, sans-serif; /* Reinforce the original font */
-    color: #333; /* Ensure dark gray text for readability */
+    font-family: 'Helvetica Neue', Arial, sans-serif; 
+    color: #333; 
     margin: 0;
     padding: 0;
 }
@@ -11,16 +13,8 @@ h1, h2, h3, h4, h5, h6 {
     color: #333;
 }
 
+/* ------------------ Navigation ------------------ */
 
-header {
-    background-color: #ffcccb; /* Subtle pink */
-    padding: 20px 40px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    width: 100%;
-}
 
 nav {
     display: flex;
@@ -72,22 +66,21 @@ nav ul li a.button {
 nav ul li a.button:hover {
     background-color: #ba8989; /* Darker pink on hover */
     transform: translateY(-3px); /* Elevate the button on hover */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Increase shadow on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); 
 }
 
-
-
+/* ------------------ Hero Section ------------------ */
 
 .hero {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 150px 40px; /* Increase padding for more white space inside the hero section */
+    padding: 150px 40px; 
     background-color: #fff;
     max-width: 1200px;
     margin: 0 auto;
     flex-wrap: wrap;
-    margin-bottom: 150px; /* Increased bottom margin to add white space below the hero section */
+    margin-bottom: 150px; 
 }
 
 .hero-text {
@@ -164,25 +157,8 @@ nav ul li a.button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* ------------------ About Us Section ------------------ */
 
-footer {
-    background-color: #ffcccb;
-    padding: 20px 40px;
-    text-align: center;
-    color: #333;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 40px;
-    font-size: 14px;
-    max-width: 1200px;
-    margin: 40px auto 0;
-    border-radius: 10px;
-}
-
-
-
-
-
-/* About Us Section */
 .about-us {
     padding: 100px 20px;
     background-color: #fff7f5; /* Light, warm pinkish background */
@@ -239,15 +215,15 @@ footer {
 
 .about-us .feature {
     background: #fff;
-    padding: 40px 30px; /* Increased padding for a more spacious feel */
-    border-radius: 15px; /* Slightly rounder corners for a modern look */
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12); /* Slightly larger shadow for more depth */
+    padding: 40px 30px; 
+    border-radius: 15px; 
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12); 
     max-width: 30%;
     min-width: 250px;
     margin: 10px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #f0f0f5; /* Subtle border to add structure */
+    border: 1px solid #f0f0f5; 
 }
 
 .about-us .feature:hover {
@@ -255,10 +231,8 @@ footer {
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
 }
 
-/* Removed .feature img since we're eliminating the icons */
-
 .about-us .feature h3 {
-    font-size: 26px; /* Slightly larger font for the heading */
+    font-size: 26px; 
     color: #333; /* Darker text for contrast */
     margin-bottom: 15px;
     font-weight: 700;
@@ -267,26 +241,28 @@ footer {
 .about-us .feature p {
     font-size: 18px;
     color: #666;
-    line-height: 1.6; /* Slightly increased line-height for better readability */
+    line-height: 1.6; 
 }
 
 .about-us .cta {
-    background-color: #ff6b6b; /* Call to action background */
-    padding: 25px; /* Increased padding */
+    background-color: #ff6b6b; 
+    padding: 25px; 
     border-radius: 30px; /* More rounded for a modern touch */
     color: #fff;
-    font-size: 22px; /* Slightly larger font for emphasis */
+    font-size: 22px; 
     font-weight: 700;
     text-align: center;
     max-width: 600px;
-    margin: 0 auto; /* Center the CTA */
+    margin: 0 auto;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .about-us .cta:hover {
     background-color: #e65353; /* Slightly darker pink on hover */
-    transform: translateY(-5px); /* More pronounced hover effect */
+    transform: translateY(-5px); 
 }
+
+/* ------------------ Responsive Adjustments for About Us Section ------------------ */
 
 @media (max-width: 768px) {
     .about-us .features {
@@ -306,15 +282,7 @@ footer {
     }
 }
 
-
-
-
-
-
-
-
-
-
+/* ------------------ Progress Bar Styles ------------------ */
 
 /* Progress Bar Container */
 .progress-container {
@@ -329,14 +297,14 @@ footer {
 /* Progress Bar */
 .progress-bar {
     height: 100%;
-    background-color: #ffcccb; /* Change color to match the checkbox pink */
+    background-color: #ffcccb; 
     width: 0;
     transition: width 0.3s ease;
     border-radius: 4px;
 }
 
+/* ------------------ My Dashboard Section ------------------ */
 
-/* My Dashboard Section */
 nav ul li a#dashboardBtn {
     background-color: #ffcccb; /* Pink color for consistency */
     color: #333;
@@ -344,7 +312,7 @@ nav ul li a#dashboardBtn {
     border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    z-index: 1003; /* Ensure it's above the dim overlay */
+    z-index: 1003; 
     position: relative; /* Make sure it remains clickable */
 }
 
@@ -363,22 +331,22 @@ nav ul li a#dashboardBtn:hover {
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
     overflow-y: auto;
     transition: right 0.3s ease; /* Smooth slide-in effect */
-    z-index: 1002; /* Keep above other elements */
+    z-index: 1002; 
 }
 
 /* Dashboard Content */
 .dashboard-content {
-    padding: 20px 30px; /* Adjusted padding for more spacious layout */
+    padding: 20px 30px; 
 }
 
 /* Dashboard Section */
 .dashboard-section {
-    margin-bottom: 15px; /* Adjusted margin */
+    margin-bottom: 15px; 
 }
 
 /* Dashboard Header */
 .dashboard-header {
-    padding: 12px 20px; /* Increased padding */
+    padding: 12px 20px; 
     background-color: #f7f7f7;
     cursor: pointer;
     border-radius: 5px;
@@ -400,16 +368,15 @@ nav ul li a#dashboardBtn:hover {
     background-color: #f7f7f7; /* Subtle contrast */
 }
 
-/* Adjust width distribution of columns */
 .column-title {
-    flex: 1; /* Give equal space to each column */
-    text-align: center; /* Center the text */
+    flex: 1; 
+    text-align: center; 
     color: #333;
 }
 
 /* Dashboard Items */
 .dashboard-items {
-    display: none; /* Keep toggle functionality */
+    display: none;
     margin-top: 10px;
     padding: 10px 15px;
     background-color: #fff;
@@ -422,7 +389,7 @@ nav ul li a#dashboardBtn:hover {
 .dashboard-row {
     display: flex;
     align-items: center;
-    padding: 15px; /* Increased padding */
+    padding: 15px; 
     background-color: #f7f7f7;
     border-radius: 5px;
     border: 1px solid #ddd;
@@ -443,7 +410,7 @@ nav ul li a#dashboardBtn:hover {
 }
 
 .dashboard-row input[type="checkbox"] {
-    display: none; /* No change to functionality */
+    display: none; 
 }
 
 .dashboard-row input[type="checkbox"]:checked + .checkbox {
@@ -469,11 +436,11 @@ nav ul li a#dashboardBtn:hover {
 
 /* Handout Link */
 .dashboard-row .handout-link {
-    flex: 2; /* Handout Title takes more space */
+    flex: 2; 
     color: #333; /* Dark text */
     text-decoration: none;
-    font-size: 14px; /* Font size adjustment */
-    text-align: left; /* Align text to the left */
+    font-size: 14px; 
+    text-align: left;
 }
 
 .dashboard-row .handout-link:hover {
@@ -482,16 +449,11 @@ nav ul li a#dashboardBtn:hover {
 
 /* Show Dashboard on click */
 .dashboard.show {
-    right: 0; /* Slide in from the right */
+    right: 0; 
 }
 
+/* ------------------ Dimming Effect ------------------ */
 
-
-
-
-
-
-/* Dimming Effect */
 .dim-overlay {
     position: fixed;
     top: 0;
@@ -500,45 +462,35 @@ nav ul li a#dashboardBtn:hover {
     height: 100%; /* Cover the entire viewport */
     background-color: rgba(0, 0, 0, 0.5); /* Dimming effect */
     z-index: 1001; /* Just below the dashboard, above other content */
-    display: none; /* Hidden initially */
-    opacity: 0; /* Start as invisible */
+    display: none; 
+    opacity: 0; 
     transition: opacity 0.3s ease;
 }
 
 .dim-overlay.show {
-    display: block; /* Make it visible */
-    opacity: 1; /* Fully visible */
+    display: block; 
+    opacity: 1; 
 }
 
-/* Content Wrapper */
+/* ------------------ Content Wrapper ------------------ */
+
 .content-wrapper {
-    position: relative; /* Maintain layout without shifting */
-    z-index: 1000; /* Below the dimming overlay */
+    position: relative; 
+    z-index: 1000; 
 }
 
-/* Ensure the body doesn't exceed its natural width and no horizontal scroll */
+/* Prevent horizontal scrolling */
 body {
     overflow-x: hidden;
 }
 
 
-/* Overlay for Dimming Effect */
-.dim-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: none; /* Hidden by default */
-    z-index: 1002; /* Below the Sign-In form */
-}
 
-.dim-overlay.show {
-    display: block;
-}
 
-/* Sign-In Form Styles */
+
+
+/* ------------------ Sign-In Form Styles ------------------ */
+
 .wrapper {
     position: fixed; /* Ensures the form is fixed in the viewport */
     top: 50%;
@@ -565,11 +517,7 @@ body {
     cursor: pointer;
 }
 
-
-
-
-
-
+/* ------------------ Hero tweaks ------------------ */
 
 .hero {
     position: relative;
@@ -601,6 +549,8 @@ body {
     justify-content: flex-end;
 }
 
+/* ------------------ Overlapping Image Styling ------------------ */
+
 .image-container {
     position: relative;
     width: 250px;
@@ -624,15 +574,12 @@ body {
     right: 20px;
 }
 
-
-
 .hero-image .overlapping-image {
-    width: 155%; /* Keep the size increase */
+    width: 155%;
     max-width: 500px; /* Ensure the images don't get too large on very wide screens */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
-
 
 /* Hover effect for the top image */
 .hero-image .top-image {
@@ -656,31 +603,12 @@ body {
 }
 
 .hero-image .bottom-image:hover {
-    transform: scale(1.05); /* Slightly scale the image */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add a shadow for a pop-out effect */
+    transform: scale(1.05); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
 }
 
+/* ------------------ Anatomy Section ------------------ */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Anatomy Section */
 .anatomy-section {
     padding: 100px 20px;
     background-color: #fff;
@@ -707,7 +635,7 @@ body {
     align-items: center;
     position: relative;
     margin-top: 60px;
-    max-width: 800px; /* Constrain width */
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -716,8 +644,8 @@ body {
     position: relative;
     text-align: center;
     flex: 0 1 100%; /* Give image 100% of the width */
-    margin: 0 0px; /* Reduced spacing between image and annotations */
-    z-index: 1; /* Lower z-index so lines can overlap */
+    margin: 0 0px; 
+    z-index: 1; 
 }
 
 .handout-image {
@@ -725,10 +653,11 @@ body {
     max-width: 600px; 
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    z-index: 1; /* Lower z-index so lines can overlap */
+    z-index: 1; 
 }
 
-/* Annotation Styling */
+/* ------------------ Annotation Styling ------------------ */
+
 .annotation-wrapper {
     position: absolute;
     width: 240px;
@@ -737,26 +666,26 @@ body {
     z-index: 2; /* Higher z-index for annotations */
 }
 
-
 .annotation {
     padding: 15px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     position: relative;
-    z-index: 2; /* Higher z-index for annotations */
+    z-index: 2; 
 }
 
 .annotation-line {
     position: absolute;
-    width: 40px; /* Shorter line */
+    width: 40px; 
     height: 2px;
     background-color: #ff6b6b;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 2; /* Higher z-index for lines */
+    z-index: 2;
 }
 
+/* Left and Right Annotation Lines */
 .annotation-left .annotation-line {
     right: -80px;
 }
@@ -765,153 +694,82 @@ body {
     left: -80px;
 }
 
-/* Custom Controls for Individual Annotations */
+/* ------------------ Custom Annotation Controls ------------------ */
+
 .custom-annotation-left {
-    top: 33%; /* Control the vertical position of the left annotation */
-    left: -200px; /* Control the horizontal position of the left annotation */
+    top: 33%; 
+    left: -200px; 
 }
 
 .custom-line-left {
-    width: 70px; /* Control the length of the left annotation line */
-    top: 50%; /* Control the vertical alignment of the left annotation line */
-    z-index: 2; /* Ensure line overlaps with the image */
+    width: 70px; 
+    top: 50%; 
+    z-index: 2; 
 }
 
 .custom-annotation-right {
-    top: 65%; /* Control the vertical position of the right annotation */
-    right: -200px; /* Control the horizontal position of the right annotation */
+    top: 65%; 
+    right: -200px; 
 }
 
 .custom-line-right {
-    width: 70px; /* Control the length of the right annotation line */
-    top: 50%; /* Control the vertical alignment of the right annotation line */
-    z-index: 2; /* Ensure line overlaps with the image */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .anatomy-content {
-        flex-direction: column;
-        position: static;
-    }
-
-    .annotation-wrapper {
-        position: static;
-        transform: none;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .annotation-left, .annotation-right {
-        left: auto;
-        right: auto;
-        text-align: center;
-    }
-
-    .annotation-line {
-        display: none;
-    }
+    width: 70px; 
+    top: 50%;
+    z-index: 2;
 }
 
 
+/* ------------------ Custom Controls for the Second Set of Annotations ------------------ */
 
-
-
-
-
-
-
-
-
-
-
-/* Custom Controls for the Second Set of Annotations */
 .custom-annotation-left-2 {
-    top: 18.5%; /* Control the vertical position of the left annotation */
-    left: -200px; /* Control the horizontal position of the left annotation */
+    top: 18.5%; 
+    left: -200px; 
 }
 
 .custom-line-left-2 {
-    width: 70px; /* Control the length of the left annotation line */
-    top: 50%; /* Control the vertical alignment of the left annotation line */
-    z-index: 2; /* Ensure line overlaps with the image */
+    width: 70px; 
+    top: 50%; 
+    z-index: 2; 
 }
 
 .custom-annotation-right-2 {
-    top: 54.2%; /* Control the vertical position of the right annotation */
-    right: -200px; /* Control the horizontal position of the right annotation */
+    top: 54.2%;
+    right: -200px; 
 }
 
 .custom-line-right-2 {
-    width: 70px; /* Control the length of the right annotation line */
-    top: 50%; /* Control the vertical alignment of the right annotation line */
-    z-index: 2; /* Ensure line overlaps with the image */
+    width: 70px; 
+    top: 50%; 
+    z-index: 2; 
 }
 
+/* ------------------ Custom Controls for the Third Set of Annotations ------------------ */
 
-
-
-
-
-
-
-
-
-
-
-
-/* Custom Controls for Individual Annotations - Clone 3 */
 .custom-annotation-left-3 {
-    top: 40%; /* Control the vertical position of the left annotation for clone 3 */
-    left: -200px; /* Control the horizontal position of the left annotation for clone 3 */
+    top: 40%; 
+    left: -200px; 
 }
 
 .custom-line-left-3 {
-    width: 70px; /* Control the length of the left annotation line for clone 3 */
-    top: 50%; /* Control the vertical alignment of the left annotation line for clone 3 */
-    z-index: 2; /* Ensure line overlaps with the image */
+    width: 70px; 
+    top: 50%; 
+    z-index: 2; 
 }
 
 .custom-annotation-right-3 {
-    top: 22%; /* Control the vertical position of the right annotation for clone 3 */
-    right: -200px; /* Control the horizontal position of the right annotation for clone 3 */
+    top: 22%; 
+    right: -200px;
 }
 
 .custom-line-right-3 {
-    width: 70px; /* Control the length of the right annotation line for clone 3 */
-    top: 50%; /* Control the vertical alignment of the right annotation line for clone 3 */
-    z-index: 2; /* Ensure line overlaps with the image */
+    width: 70px; 
+    top: 50%; 
+    z-index: 2;
 }
 
 
+/* ------------------ Header Styling ------------------ */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* General Styling */
-body, html {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
-
-/* Header */
 header {
     background: linear-gradient(135deg, #ffcccb, #f08080); /* Gradient for more depth */
     padding: 20px 40px;
@@ -922,44 +780,9 @@ header {
     width: 100%;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
 
-nav .logo {
-    font-size: 28px;
-    font-weight: 700;
-    color: #333;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
+/* ------------------ Handout Page Styling ------------------ */
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 30px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    font-size: 16px;
-    padding: 8px 16px;
-    transition: color 0.3s ease;
-}
-
-nav ul li a:hover {
-    color: #ba8989;
-}
-
-/* Handout Page Styling */
 .handout-page {
     padding: 50px 20px;
     max-width: 1200px;
@@ -978,7 +801,7 @@ nav ul li a:hover {
 }
 
 .handout-header h2 {
-    font-size: 30px; /* Slightly larger for emphasis */
+    font-size: 30px; 
     color: #333;
     text-align: center;
     margin-bottom: 30px;
@@ -1011,7 +834,7 @@ nav ul li a:hover {
 
 .handout-image-sep:hover {
     transform: scale(1.05); /* Slight zoom effect */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
 .handout-details {
@@ -1019,13 +842,13 @@ nav ul li a:hover {
 }
 
 .handout-details h2 {
-    font-size: 34px; /* Increased font size for better hierarchy */
+    font-size: 34px; 
     color: #ff6b6b;
     margin-bottom: 20px;
 }
 
 .handout-details h3 {
-    font-size: 28px; /* Increased font size for subheadings */
+    font-size: 28px;
     color: #333;
     margin-bottom: 15px;
     font-weight: 600;
@@ -1034,7 +857,7 @@ nav ul li a:hover {
 .handout-details p, .handout-details ul {
     font-size: 18px;
     color: #555;
-    line-height: 1.8; /* More spacing for better readability */
+    line-height: 1.8;
 }
 
 .handout-details ul {
@@ -1042,30 +865,8 @@ nav ul li a:hover {
     list-style-type: disc;
 }
 
-.cta {
-    text-align: center;
-    margin-top: 30px;
-}
+/* ------------------ Responsive Handout Design ------------------ */
 
-.cta .button {
-    background-color: #ff6b6b;
-    color: #fff;
-    padding: 15px 30px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-size: 18px;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 2px solid #e65353; /* Add a border for a more pronounced button */
-}
-
-.cta .button:hover {
-    background-color: #e65353;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .handout-content {
         flex-direction: column;
@@ -1085,9 +886,8 @@ nav ul li a:hover {
     }
 }
 
+/* ------------------ Flash Messages Styling ------------------ */
 
-
-/* Flash messages styling */
 .flash-messages {
     position: fixed;
     top: 10px;
@@ -1120,8 +920,8 @@ nav ul li a:hover {
     color: #ffffff;
 }
 
+/* ------------------ Download Handout Button Specific Styling ------------------ */
 
-/* General Button Styling */
 .btn {
     padding: 10px 20px;
     font-size: 16px;
@@ -1131,7 +931,6 @@ nav ul li a:hover {
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Download Handout Button Specific Styling */
 .btn-primary {
     background-color: #FF7070; /* Matching pink color */
     color: #fff;

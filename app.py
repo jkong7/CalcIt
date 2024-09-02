@@ -15,14 +15,14 @@ def get_db_connection():
         host="localhost",
         database="Postgresql DB",
         user="postgres",
-        password="Geobobo77$"
+        password="Geobobo"
     )
     return conn
 
 # ------------------ Flask-Login Manager Setup ------------------
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'login'  # Redirect to login page if not logged in
+login_manager.login_view = 'login'
 
 # ------------------ User Loader for Flask-Login ------------------
 @login_manager.user_loader

@@ -1,17 +1,16 @@
 import psycopg2
 
-# Connect to your PostgreSQL database
 conn = psycopg2.connect(
     host="localhost",
     database="Postgresql DB",
     user="postgres",
-    password="Geobobo77$"
+    password="Geobobo"
 )
 
-# Create a cursor object to execute SQL queries
+
 cur = conn.cursor()
 
-# Write your SQL statements
+
 create_users_table = """
 CREATE TABLE IF NOT EXISTS user (
     id SERIAL PRIMARY KEY,
@@ -38,15 +37,15 @@ CREATE TABLE IF NOT EXISTS handout_progress (
 );
 """
 
-# Execute the SQL statements
+
 cur.execute(create_users_table)
 cur.execute(create_handouts_table)
 cur.execute(create_handout_progress_table)
 
-# Commit the changes to the database
+
 conn.commit()
 
-# Close the cursor and connection
+
 cur.close()
 conn.close()
 

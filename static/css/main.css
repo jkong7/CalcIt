@@ -13,7 +13,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #333;
 }
 
-/* ------------------ Navigation ------------------ */
+/* ------------------ Navigation Header------------------ */
 
 
 nav {
@@ -26,8 +26,8 @@ nav {
 
 nav .logo {
     font-size: 28px;
-    font-weight: 700; /* Bolder font weight */
-    color: #333; /* Dark gray */
+    font-weight: 1000; 
+    color: #333;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -42,7 +42,7 @@ nav ul {
 
 nav ul li a {
     text-decoration: none;
-    color: #333; /* Dark gray for links */
+    color: #333; 
     font-weight: 500;
     font-size: 16px;
     padding: 8px 16px;
@@ -50,12 +50,12 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #ba8989; /* Darker pink on hover */
+    color: #ba8989; 
 }
 
 nav ul li a.button {
     background-color: #d1a7a8; /* A slightly darker shade of pink for the button */
-    color: #fff; /* White text for contrast */
+    color: #333; /* White text for contrast */
     padding: 10px 25px;
     border-radius: 30px;
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -159,11 +159,13 @@ nav ul li a.button:hover {
 
 /* ------------------ About Us Section ------------------ */
 
+
 .about-us {
-    padding: 100px 20px;
-    background-color: #fff7f5; /* Light, warm pinkish background */
-    text-align: center;
+    padding: 100px 20px; 
+    background-color: #fff7f5;
+    text-align: center; 
 }
+
 
 .about-us .container {
     max-width: 1200px;
@@ -201,15 +203,14 @@ nav ul li a.button:hover {
     margin-bottom: 40px;
     line-height: 1.6;
     max-width: 800px;
-    margin-left: auto;
+    margin-left: auto; 
     margin-right: auto;
 }
 
 .about-us .features {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 60px;
-    flex-wrap: wrap;
+    margin-bottom: 80px;
     gap: 20px; /* Add spacing between items */
 }
 
@@ -330,7 +331,7 @@ nav ul li a#dashboardBtn:hover {
     background-color: #fff;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
     overflow-y: auto;
-    transition: right 0.3s ease; /* Smooth slide-in effect */
+    transition: right 0.5s ease; /* Smooth slide-in effect */
     z-index: 1002; 
 }
 
@@ -528,6 +529,7 @@ body {
     align-items: center;
     padding: 100px 40px;
     background-color: #fff;
+    margin-bottom: 45px; 
 }
 
 .hero-text {

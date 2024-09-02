@@ -1,5 +1,5 @@
+import psycopg2
 from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 # ------------------ Importing Handout Data ------------------
@@ -7,62 +7,62 @@ from handout_data import handouts
 
 # ------------------ Flask Application Setup ------------------
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'your_secret_key'  # Needed for session management
+app.config['SECRET_KEY'] = 'AKPAKP' 
 
-# ------------------ Database Setup ------------------
-db = SQLAlchemy(app)
+# ------------------ PostgreSQL Connection Setup ------------------
+def get_db_connection():
+    conn = psycopg2.connect(
+        host="localhost",
+        database="Postgresql DB",
+        user="postgres",
+        password="Geobobo77$"
+    )
+    return conn
 
 # ------------------ Flask-Login Manager Setup ------------------
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'  # Redirect to login page if not logged in
 
-# ------------------ User Model ------------------
-class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(150), nullable=False)
-    email = db.Column(db.String(150), unique=True, nullable=False)
-    password = db.Column(db.String(150), nullable=False)
-    handout_progress = db.relationship('HandoutProgress', backref='user', lazy=True)
-
-# ------------------ Handout Model ------------------
-class Handout(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(150), nullable=False)
-
-# ------------------ Handout Progress Model ------------------
-class HandoutProgress(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    handout_id = db.Column(db.Integer, db.ForeignKey('handout.id'), nullable=False)
-    is_completed = db.Column(db.Boolean, default=False)  # Track if the handout is completed
-
-# ------------------ Database Initialization ------------------
-with app.app_context():
-    db.create_all()
-
-
 # ------------------ User Loader for Flask-Login ------------------
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT id, username, email FROM user WHERE id = %s', (user_id,))
+    user = cur.fetchone()
+    cur.close()
+    conn.close()
+
+    if user:
+        user_obj = UserMixin()
+        user_obj.id = user[0]
+        user_obj.username = user[1]
+        user_obj.email = user[2]
+        return user_obj
+    return None
 
 # ------------------ Main Route ------------------
 @app.route('/')
 def main():
+    user_progress = {}
+
     if current_user.is_authenticated:
-        # Get the progress for the current user
-        progress = HandoutProgress.query.filter_by(user_id=current_user.id).all()
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('SELECT handout_id, is_completed FROM handout_progress WHERE user_id = %s', (current_user.id,))
+        progress = cur.fetchall()
+        cur.close()
+        conn.close()
 
-        # Create a dictionary to store the progress
-        user_progress = {p.handout_id: p.is_completed for p in progress}
-    else:
-        user_progress = {}  # Default to empty dictionary for logged-out users
+        user_progress = {p[0]: p[1] for p in progress}
 
-    # Get all handouts
-    handouts = Handout.query.all()
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT id, title FROM handouts')
+    handouts = cur.fetchall()
+    cur.close()
+    conn.close()
 
     return render_template('main.html', handouts=handouts, user_progress=user_progress)
 
@@ -73,16 +73,22 @@ def register():
     email = request.form.get('email')
     password = request.form.get('password')
 
-    # Check if the email already exists
-    existing_user = User.query.filter_by(email=email).first()
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT id FROM users WHERE email = %s', (email,))
+    existing_user = cur.fetchone()
+
     if existing_user:
         flash("Email already registered. Please use a different email.", "error")
+        cur.close()
+        conn.close()
         return redirect(url_for('main'))
 
-    # Create a new user and add to the database
-    new_user = User(username=username, email=email, password=password)
-    db.session.add(new_user)
-    db.session.commit()
+    cur.execute('INSERT INTO users (username, email, password) VALUES (%s, %s, %s)',
+                (username, email, password))
+    conn.commit()
+    cur.close()
+    conn.close()
 
     flash("Registration successful!", "success")
     return redirect(url_for('main'))
@@ -92,47 +98,45 @@ def register():
 def login():
     email = request.form.get('email')
     password = request.form.get('password')
-    user = User.query.filter_by(email=email).first()
 
-    if user and user.password == password:
-        login_user(user)
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT id, password FROM users WHERE email = %s', (email,))
+    user = cur.fetchone()
+    cur.close()
+    conn.close()
+
+    if user and user[1] == password:
+        user_obj = UserMixin()
+        user_obj.id = user[0]
+        login_user(user_obj)
         flash("Login successful!", "success")
         return redirect(url_for('main'))
     else:
         flash("Login failed. Check your email and password.", "error")
         return redirect(url_for('main'))
 
-# ------------------ Dashboard Route ------------------
-@app.route('/dashboard')
-@login_required
-def dashboard():
-    # Get the progress for the current user
-    progress = HandoutProgress.query.filter_by(user_id=current_user.id).all()
-
-    # Create a dictionary to store the progress
-    progress_dict = {p.handout_id: p.is_completed for p in progress}
-
-    # Get all handouts
-    handouts = Handout.query.all()
-
-    return render_template('dashboard.html', handouts=handouts, progress=progress_dict)
-
 # ------------------ Logout Route ------------------
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('main'))  # Redirect to the main page after logging out
+    return redirect(url_for('main'))  
 
 # ------------------ Handout Route ------------------
 @app.route('/handout/<int:handout_id>')
 @login_required
 def handout(handout_id):
-    # Fetch the handout data
     handout_data = handouts.get(handout_id, None)
-
     if not handout_data:
         return "Handout not found", 404
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('UPDATE users SET last_handout_viewed = %s WHERE id = %s', (handout_id, current_user.id))
+    conn.commit()
+    cur.close()
+    conn.close()
 
     return render_template('handout.html', handout=handout_data, handout_id=handout_id)
 
@@ -144,21 +148,22 @@ def update_progress():
     handout_id = data.get('handout_id')
     is_completed = data.get('is_completed')
 
-    # Check if progress already exists
-    progress = HandoutProgress.query.filter_by(user_id=current_user.id, handout_id=handout_id).first()
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT id FROM handout_progress WHERE user_id = %s AND handout_id = %s', (current_user.id, handout_id))
+    progress = cur.fetchone()
 
     if progress:
-        progress.is_completed = is_completed
+        cur.execute('UPDATE handout_progress SET is_completed = %s WHERE id = %s', (is_completed, progress[0]))
     else:
-        progress = HandoutProgress(user_id=current_user.id, handout_id=handout_id, is_completed=is_completed)
-        db.session.add(progress)
-
-    db.session.commit()
+        cur.execute('INSERT INTO handout_progress (user_id, handout_id, is_completed) VALUES (%s, %s, %s)',
+                    (current_user.id, handout_id, is_completed))
+    conn.commit()
+    cur.close()
+    conn.close()
 
     return {"message": "Progress updated successfully"}
 
 # ------------------ Main Execution ------------------
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()  # Create the database and tables
     app.run(debug=True, port=5001)
